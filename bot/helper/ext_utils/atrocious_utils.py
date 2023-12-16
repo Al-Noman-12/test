@@ -493,9 +493,11 @@ async def BotPm_check(message, button=None):
 
 
 async def task_utils(message):
+    LOGGER.info("Running Task Checking")
     msg = []
     button = None
-    if config_dict['BOT_MAX_TASKS'] and len(download_dict) >= config_dict['BOT_MAX_TASKS']:
-        t_msg = f"Bot Max Tasks limit exceeded.\nBot max tasks limit is {config_dict['BOT_MAX_TASKS']}.\nPlease wait for the completion of other tasks."
-        msg.append(t_msg)
+    if config_dict['BOT_MAX_TASKS']:
+        if len(download_dict) >= config_dict['BOT_MAX_TASKS']:
+            task_msg = f"Bot Max Tasks limit exceeded.\nBot max tasks limit is {config_dict['BOT_MAX_TASKS']}.\nPlease wait for the completion of other tasks."
+            msg.append(task_msg)
     return msg, button
