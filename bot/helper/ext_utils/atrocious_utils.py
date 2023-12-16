@@ -503,8 +503,6 @@ async def task_utils(message):
     button = None
     user_id = message.from_user.id
     user = await message._client.get_users(user_id)
-    if user_id == OWNER_ID:
-        return msg, button
     b_msg, button = checking_blacklist(message, button)
     if b_msg is not None:
         msg.append(b_msg)
