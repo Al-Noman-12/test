@@ -59,6 +59,7 @@ async def clean(credentials, message):
 
 
 async def drive_clean(client, message):
+    await message.reply(f"Starting drive cleaning")
     credentials = None
     if config_dict.get('USE_SERVICE_ACCOUNTS') and ospath.exists('accounts'):
         try:
