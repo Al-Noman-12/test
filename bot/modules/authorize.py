@@ -181,9 +181,7 @@ async def add_to_paid_user(client, message):
     elif reply_to := message.reply_to_message:
         id_ = reply_to.from_user.id
     if id_:
-        if id_ == OWNER_ID:
-            msg = 'You are playing with owner.'
-        elif id_ in user_data and user_data[id_].get('is_paid_user'):
+        if id_ in user_data and user_data[id_].get('is_paid_user'):
             msg = 'User already in paid user list.'
         else:
             update_user_ldata(id_, 'is_paid_user', True)
@@ -204,9 +202,7 @@ async def remove_from_paid_user(client, message):
     elif reply_to := message.reply_to_message:
         id_ = reply_to.from_user.id
     if id_:
-        if id_ == OWNER_ID:
-            msg = 'You are playing with owner'
-        elif id_ not in user_data and user_data[id_].get('is_paid_user'):
+        if id_ not in user_data and user_data[id_].get('is_paid_user'):
             msg = 'User not in paid user list.'
         else:
             update_user_ldata(id_, 'is_paid_user', False)
