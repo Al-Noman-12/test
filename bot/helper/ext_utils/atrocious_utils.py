@@ -496,6 +496,8 @@ async def task_utils(message):
     LOGGER.info("Running Task Checking")
     msg = []
     button = None
+    user_id = message.from_user.id
+    user = await message._client.get_users(user_id)
     if config_dict['BOT_MAX_TASKS'] and len(download_dict) >= config_dict['BOT_MAX_TASKS']:
             msg.append(f"Bot Max Tasks limit exceeded.\nBot max tasks limit is {config_dict['BOT_MAX_TASKS']}.\nPlease wait for the completion of other tasks.")
     if (maxtask := config_dict['USER_MAX_TASKS']) and await get_user_tasks(message.from_user.id, maxtask):
