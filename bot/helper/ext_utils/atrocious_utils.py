@@ -498,11 +498,26 @@ async def task_utils(message):
     button = None
     user_id = message.from_user.id
     user = await message._client.get_users(user_id)
+    b_msg, button = checking_blacklist(message, button)
+    if b_msg is not None:
+        msg.append(b_msg)
+    if config_dict['BOT_PM']:
+        if user.status == user.status.LONG_AGO:
+            _msg, button = await BotPm_check(message, button)
+            if _msg:
+                msg.append(_msg)
+    if ids := config_dict['FSUB_IDS']:
+        _msg, button = await forcesub(message, ids, button)
+        if _msg:
+            msg.append(_msg)
     if config_dict['BOT_MAX_TASKS'] and len(download_dict) >= config_dict['BOT_MAX_TASKS']:
         msg.append(f"Bot Max Tasks limit exceeded.\nBot max tasks limit is {config_dict['BOT_MAX_TASKS']}.\nPlease wait for the completion of other tasks.")
     if (maxtask := config_dict['USER_MAX_TASKS']) and await get_user_tasks(message.from_user.id, maxtask):
         if config_dict['PAID_SERVICE'] and user_id in user_data and user_data[user_id].get('is_paid_user'):
             pass
         else:
-            msg.append(f"User tasks limit is {maxtask}")
+            msg.append(f"User tasks limit is {maxtask}./nPlease wait for the completion of your old tasks")
+    token_msg, button = checking_token_status(message, button)
+    if token_msg is not None:
+        msg.append(token_msg)
     return msg, button
