@@ -516,7 +516,7 @@ async def task_utils(message):
         if config_dict['PAID_SERVICE'] and user_id in user_data and user_data[user_id].get('is_paid_user'):
             pass
         else:
-            msg.append(f"User tasks limit is {maxtask}./nPlease wait for the completion of your old tasks")
+            msg.append(f"User tasks limit is {maxtask}.\nnPlease wait for the completion of your old tasks.")
     token_msg, button = checking_token_status(message, button)
     if token_msg is not None:
         msg.append(token_msg)
