@@ -501,5 +501,6 @@ async def task_utils(message):
     if config_dict['BOT_MAX_TASKS'] and len(download_dict) >= config_dict['BOT_MAX_TASKS']:
             msg.append(f"Bot Max Tasks limit exceeded.\nBot max tasks limit is {config_dict['BOT_MAX_TASKS']}.\nPlease wait for the completion of other tasks.")
     if (maxtask := config_dict['USER_MAX_TASKS']) and await get_user_tasks(message.from_user.id, maxtask):
-        msg.append(f"Your tasks limit exceeded for {maxtask} tasks")
+        if config_dict['PAID_SERVICE'] and user_id in user_data and not user_data[user_id].get('is_paid_user'):
+            msg.append(f"Your tasks limit exceeded for {maxtask} tasks")
     return msg, button
