@@ -156,7 +156,7 @@ def get_readable_message():
             msg += f" | <b>{theme['Time']}: </b>{download.seeding_time()}"
         else:
             msg += f"\n<b>{theme['Size']}: </b>{download.size()}"
-        msg += f"\n<b>{theme['Stop']} </b><code>/{BotCommands.CancelMirror} {download.gid()}</code>\n\n"
+        msg += f"\n<b>{theme['Stop']} </b><code>/{BotCommands.CancelMirror} {download.gid()}</code>\n"
     if len(msg) == 0:
         return None, None
     dl_speed = 0
@@ -186,7 +186,6 @@ def get_readable_message():
         TASKS_COUNT = f"<b>Task Limit: </b>{config_dict['BOT_MAX_TASKS']} | <b>Run:</b> {tasks} | <b>Free:</b> {config_dict['BOT_MAX_TASKS'] - tasks}"
     else:
         TASKS_COUNT = f"<b>Tasks Running:</b> {tasks}"
-    msg += f"________________________________"
     msg += f"\n{TASKS_COUNT}\n"
     msg += f"<b>CPU:</b> {cpu_percent()}% | <b>FREE:</b> {get_readable_file_size(disk_usage(config_dict['DOWNLOAD_DIR']).free)}"
     msg += f"\n<b>RAM:</b> {virtual_memory().percent}% | <b>UP:</b> {get_readable_time(time() - botStartTime)}"
