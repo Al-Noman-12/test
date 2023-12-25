@@ -156,7 +156,7 @@ def get_readable_message():
             msg += f" | <b>{theme['Time']}: </b>{download.seeding_time()}"
         else:
             msg += f"\n<b>{theme['Size']}: </b>{download.size()}"
-        msg += f"\n<b>{theme['Stop']} </b><code>/{BotCommands.CancelMirror} {download.gid()}</code>\n"
+        msg += f"\n<b>{theme['Stop']} </b><code>/{BotCommands.CancelMirror} {download.gid()}</code>\n\n"
     if len(msg) == 0:
         return None, None
     dl_speed = 0
