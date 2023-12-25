@@ -358,7 +358,6 @@ async def _ytdl(client, message, isLeech=False, sameDir=None, bulk=[]):
     if not is_url(link):
         reply_message = await sendMessage(message, YT_HELP_MESSAGE)
         await deleteMessage(message)
-        await one_minute_del(reply_message)
         return
 
     error_msg = []
@@ -453,7 +452,6 @@ async def _ytdl(client, message, isLeech=False, sameDir=None, bulk=[]):
         x = await sendMessage(message, f'{tag} {msg}')
         __run_multi()
         await delete_links(message)
-        await five_minute_del(x)
         return
 
     __run_multi()
