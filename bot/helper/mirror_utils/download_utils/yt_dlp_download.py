@@ -4,7 +4,7 @@ from logging import getLogger
 from yt_dlp import YoutubeDL, DownloadError
 from re import search as re_search
 
-from bot import task_dict_lock, task_dict, non_queued_dl, queue_dict_lock
+from bot import download_dict_lock, download_dict, non_queued_dl, queue_dict_lock
 from bot.helper.telegram_helper.message_utils import sendStatusMessage
 from ..status_utils.yt_dlp_download_status import YtDlpDownloadStatus
 from bot.helper.mirror_utils.status_utils.queue_status import QueueStatus
@@ -121,8 +121,8 @@ class YoutubeDLHelper:
                 pass
 
     async def _onDownloadStart(self, from_queue=False):
-        async with task_dict_lock:
-            task_dict[self._listener.mid] = YtDlpDownloadStatus(
+        async with download_dict_lock:
+            download_dict[self._listener.mid] = YtDlpDownloadStatus(
                 self._listener, self, self._gid
             )
         if not from_queue:
@@ -315,13 +315,13 @@ class YoutubeDLHelper:
         add_to_queue, event = await is_queued(self._listener.mid)
         if add_to_queue:
             LOGGER.info(f"Added to Queue/Download: {self._listener.name}")
-            async with task_dict_lock:
-                task_dict[self._listener.mid] = QueueStatus(
+            async with download_dict_lock:
+                download_dict[self._listener.mid] = QueueStatus(
                     self._listener, self._size, self._gid, "dl"
                 )
             await event.wait()
-            async with task_dict_lock:
-                if self._listener.mid not in task_dict:
+            async with download_dict_lock:
+                if self._listener.mid not in download_dict:
                     return
             LOGGER.info(f"Start Queued Download from YT_DLP: {self._listener.name}")
             await self._onDownloadStart(True)
