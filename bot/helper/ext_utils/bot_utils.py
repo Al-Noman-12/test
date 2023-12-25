@@ -186,8 +186,9 @@ def get_readable_message():
         TASKS_COUNT = f"<b>Task Limit: </b>{config_dict['BOT_MAX_TASKS']} | <b>Run:</b> {tasks} | <b>Free:</b> {config_dict['BOT_MAX_TASKS'] - tasks}"
     else:
         TASKS_COUNT = f"<b>Tasks Running:</b> {tasks}"
-    msg += f"\n{TASKS_COUNT}\n"
-    msg += f"<b>CPU:</b> {cpu_percent()}% | <b>FREE:</b> {get_readable_file_size(disk_usage(config_dict['DOWNLOAD_DIR']).free)}"
+    msg += f"■■■■■■■■■■■■■■■■■■■■■"
+    msg += f"\n{TASKS_COUNT}"
+    msg += f"\n<b>CPU:</b> {cpu_percent()}% | <b>FREE:</b> {get_readable_file_size(disk_usage(config_dict['DOWNLOAD_DIR']).free)}"
     msg += f"\n<b>RAM:</b> {virtual_memory().percent}% | <b>UP:</b> {get_readable_time(time() - botStartTime)}"
     msg += f"\n<b>DL:</b> {get_readable_file_size(dl_speed)}/s | <b>UL:</b> {get_readable_file_size(up_speed)}/s"
     return msg, button
