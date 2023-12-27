@@ -14,8 +14,7 @@ from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
 
 from bot import config_dict
-from bot.helper.ext_utils.bot_utils import speed_string_to_bytes
-from bot.helper.ext_utils.bot_utils import is_share_link
+from bot.helper.ext_utils.bot_utils import speed_string_to_bytes, is_share_link
 from bot.helper.ext_utils.exceptions import DirectDownloadLinkException
 from bot.helper.ext_utils.help_messages import PASSWORD_ERROR_MESSAGE
 
