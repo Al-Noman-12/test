@@ -37,16 +37,13 @@ def is_archive_split(file):
 async def clean_target(path):
     if await aiopath.exists(path):
         LOGGER.info(f"Cleaning Target: {path}")
-        if await aiopath.isdir(path):
-            try:
+        try:
+            if await aiopath.isdir(path):
                 await aiormtree(path)
-            except:
-                pass
-        elif await aiopath.isfile(path):
-            try:
+            else:
                 await aioremove(path)
-            except:
-                pass
+        except Exception as e:
+            LOGGER.error(str(e))
 
 
 async def clean_download(path):
@@ -59,6 +56,7 @@ async def clean_download(path):
 
 
 async def start_cleanup():
+    aria2.remove_all(True)
     get_client().torrents_delete(torrent_hashes="all")
     try:
         await aiormtree(DOWNLOAD_DIR)
