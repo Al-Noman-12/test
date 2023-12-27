@@ -31,23 +31,6 @@ STATUS_START = 0
 PAGES = 1
 PAGE_NO = 1
 
-
-def speed_string_to_bytes(size_text: str):
-    size = 0
-    size_text = size_text.lower()
-    if "k" in size_text:
-        size += float(size_text.split("k")[0]) * 1024
-    elif "m" in size_text:
-        size += float(size_text.split("m")[0]) * 1048576
-    elif "g" in size_text:
-        size += float(size_text.split("g")[0]) * 1073741824
-    elif "t" in size_text:
-        size += float(size_text.split("t")[0]) * 1099511627776
-    elif "b" in size_text:
-        size += float(size_text.split("b")[0])
-    return size
-
-
 class MirrorStatus:
     STATUS_UPLOADING = theme['Upload']
     STATUS_DOWNLOADING = theme['Download']
@@ -75,6 +58,22 @@ class setInterval:
 
     def cancel(self):
         self.task.cancel()
+
+
+def speed_string_to_bytes(size_text: str):
+    size = 0
+    size_text = size_text.lower()
+    if "k" in size_text:
+        size += float(size_text.split("k")[0]) * 1024
+    elif "m" in size_text:
+        size += float(size_text.split("m")[0]) * 1048576
+    elif "g" in size_text:
+        size += float(size_text.split("g")[0]) * 1073741824
+    elif "t" in size_text:
+        size += float(size_text.split("t")[0]) * 1099511627776
+    elif "b" in size_text:
+        size += float(size_text.split("b")[0])
+    return size
 
 
 def get_readable_file_size(size_in_bytes):
@@ -372,6 +371,22 @@ def text_size_to_bytes(size_text):
         size += float(size_text.split('g')[0]) *1073741824
     elif 't' in size_text:
         size += float(size_text.split('t')[0]) *1099511627776
+    return size
+
+
+def speed_string_to_bytes(size_text: str):
+    size = 0
+    size_text = size_text.lower()
+    if "k" in size_text:
+        size += float(size_text.split("k")[0]) * 1024
+    elif "m" in size_text:
+        size += float(size_text.split("m")[0]) * 1048576
+    elif "g" in size_text:
+        size += float(size_text.split("g")[0]) * 1073741824
+    elif "t" in size_text:
+        size += float(size_text.split("t")[0]) * 1099511627776
+    elif "b" in size_text:
+        size += float(size_text.split("b")[0])
     return size
 
 
