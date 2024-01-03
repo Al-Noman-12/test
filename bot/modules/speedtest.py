@@ -4,10 +4,8 @@ from pyrogram.filters import command
 from pyrogram.handlers import MessageHandler
 
 from bot import bot, CMD_SUFFIX
-from bot.helper.telegram_helper.message_utils import sendMessage, editMessage, deleteMessage
 
 async def speed_test(client, message):
-    sptmsg = await sendMessage(message, "Initializing Speedtest...")
     try:
         from speedtest import Speedtest
     except ImportError:
@@ -18,8 +16,8 @@ async def speed_test(client, message):
     download_speed = st.download() / 1_000_000 / 8
     upload_speed = st.upload() / 1_000_000 / 8
     msg = f"<b>Speedtest Result.</b>"
-    msg += f"\n\n<b>• Download Speed:</b> {download_speed:.2f} Mbps"
-    msg += f"\n<b>• Upload Speed:</b> {upload_speed:.2f} Mbps"
-    await editMessage(sptmsg, msg)
+    msg += f"\n\n<b>Download Speed:</b> {download_speed:.2f} Mbps"
+    msg += f"\n<b>Upload Speed:</b> {upload_speed:.2f} Mbps"
+    await message.reply(msg)
 
 bot.add_handler(MessageHandler(speed_test, filters=command(f"speedtest{CMD_SUFFIX}")))
