@@ -9,6 +9,7 @@ async def speed_test(client, message):
     try:
         from speedtest import Speedtest
     except ImportError:
+        await message.reply(f"Speedtest pypi is not installed. Now installing it.")
         srun(['pip3', 'install', 'speedtest-cli'])
         from speedtest import Speedtest
     st = Speedtest()
