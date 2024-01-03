@@ -15,8 +15,9 @@ async def speed_test(client, message):
     st = Speedtest()
     download_speed = st.download() / 1_000_000 / 8
     upload_speed = st.upload() / 1_000_000 / 8
-    msg = f"Download Speed: {download_speed:.2f} Mbps"
-    msg += f"\nUpload Speed: {upload_speed:.2f} Mbps"
+    msg = f"<b>Speedtest Result.</b>"
+    msg += f"\n\n<b>Download Speed:</b> {download_speed:.2f} Mbps"
+    msg += f"\n<b>Upload Speed:</b> {upload_speed:.2f} Mbps"
     await message.reply(msg)
 
 bot.add_handler(MessageHandler(speed_test, filters=command(f"speedtest{CMD_SUFFIX}")))
