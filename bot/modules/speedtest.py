@@ -3,7 +3,7 @@ from subprocess import run as srun
 from pyrogram.filters import command
 from pyrogram.handlers import MessageHandler
 
-from bot import bot
+from bot import bot, CMD_SUFFIX
 
 async def speed_test(client, message):
     try:
