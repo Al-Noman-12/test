@@ -1,11 +1,16 @@
 from pyrogram import filters
-from speedtest import Speedtest
+from subprocess import run as srun
 from pyrogram.filters import command
 from pyrogram.handlers import MessageHandler
 
 from bot import bot
 
 async def speed_test(client, message):
+    try:
+        from speedtest import Speedtest
+    except ImportError:
+        srun(['pip3', 'install', 'speedtest-cli'])
+        from speedtest import Speedtest
     st = Speedtest()
     download_speed = st.download() / 1_000_000 / 8
     upload_speed = st.upload() / 1_000_000 / 8
